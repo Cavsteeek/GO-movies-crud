@@ -1,6 +1,8 @@
 package gomoviescrud
 
 import (
+	"fmt"
+
 	"github.com/gorilla/mux"
 )
 
@@ -21,5 +23,11 @@ var movies []Movie
 func main() {
 	r := mux.NewRouter()
 
-	r.HandleFunc()
+	r.HandleFunc("/movies", getMovies).Methods("GET")
+	r.HandleFunc("/movies{id}", getMovie).Methods("GET")
+	r.HandleFunc("/movies", createMovie).Methods("POST")
+	r.HandleFunc("/movies{id}", updateMovie).Methods("PUT")
+	r.HandleFunc("/movies{id}", deleteMovie).Methods("DELETE")
+
+	fmt.Printf("Starting server at port 2505\n")
 }
